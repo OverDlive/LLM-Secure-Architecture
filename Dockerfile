@@ -6,7 +6,10 @@ WORKDIR /app
 
 # 종속 파일 복사 및 설치
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
+
+# .env 파일 복사 (보안상 주의 필요)
+COPY .env .env
 
 # 소스 코드 복사
 COPY . .
