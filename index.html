@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>PlantUML 생성기</title>
+</head>
+<body>
+    <h1>PlantUML 생성기</h1>
+    <input type="text" id="securityInput" placeholder="보안 사항을 입력하세요">
+    <button onclick="generatePlantUML()">생성</button>
+    <div id="result"></div>
+
+    <script>
+        async function generatePlantUML() {
+            const securityInput = document.getElementById('securityInput').value;
+            const response = await fetch('/generate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ security: securityInput })
+            });
+            const data = await response.json();
+            document.getElementById('result').innerText = data.plantuml;
+        }
+    </script>
+</body>
+</html>
