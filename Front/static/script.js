@@ -1,56 +1,113 @@
-// 요소 가져오기
-const dropdown = document.getElementById("dropdown");
-const customInput = document.getElementById("customInput");
-const additionalInput = document.getElementById("additionalInput");
-const generateButton = document.getElementById("generateButton");
-const imageOutput = document.getElementById("imageOutput");
+// const chatMessages = document.getElementById('chat-messages');
+// const userInput = document.getElementById('user-input');
+// const sendButton = document.getElementById('send-button');
+// const checkboxes = document.querySelectorAll('input[name="system"]');
 
-// 드롭다운 변경 이벤트
-dropdown.addEventListener("change", () => {
-  if (dropdown.value === "custom") {
-    customInput.disabled = false;
-    customInput.focus();
-  } else {
-    customInput.disabled = true;
-    customInput.value = "";
-  }
-});
+// function addMessage(message, isUser = false) {
+//   const messageElement = document.createElement('div');
+//   messageElement.textContent = message;
+//   messageElement.style.marginBottom = '10px';
+//   messageElement.style.textAlign = isUser ? 'right' : 'left';
+//   messageElement.style.color = isUser ? 'blue' : 'black';
+//   chatMessages.appendChild(messageElement);
+//   chatMessages.scrollTop = chatMessages.scrollHeight;
+// }
 
-// 이미지 생성 버튼 클릭 이벤트
-generateButton.addEventListener("click", async () => {
-  // 사용자 입력 구성: 드롭다운 값 또는 직접 입력 + 추가 입력
-  let userInput = "";
-  if (dropdown.value === "custom") {
-    userInput += customInput.value;
-  } else {
-    userInput += dropdown.value;
-  }
-  if (additionalInput.value) {
-    userInput += "\n" + additionalInput.value;
-  }
+// function handleUserInput() {
+//   const message = userInput.value.trim();
+//   if (message) {
+//     const selectedSystems = Array.from(checkboxes)
+//       .filter(checkbox => checkbox.checked)
+//       .map(checkbox => checkbox.value)
+//       .join('^');
 
-  // 버튼 상태 변경
-  generateButton.disabled = true;
-  generateButton.textContent = "생성 중...";
+//     const fullMessage = selectedSystems ? `${selectedSystems}%${message}` : message;
+//     addMessage(fullMessage, true);
 
-  try {
-    // POST 방식으로 /generate API 호출
-    const response = await fetch("/generate", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ input: userInput })
-    });
-    if (!response.ok) {
-      throw new Error("다이어그램 생성 중 오류 발생");
+//     // 여기에 Gemini API 호출 또는 다른 처리 로직을 추가할 수 있습니다.
+//     let response = `챗봇: 입력받은 메시지는 "${fullMessage}" 입니다.`;
+
+//     setTimeout(() => {
+//       addMessage(response);
+//     }, 1000);
+
+//     userInput.value = '';
+//   }
+// }
+
+// sendButton.addEventListener('click', handleUserInput);
+// userInput.addEventListener('keypress', (e) => {
+//   if (e.key === 'Enter') {
+//     handleUserInput();
+//   }
+// });
+
+const chatMessages = document.getElementById('chat-messages');
+const userInput = document.getElementById('user-input');
+const sendButton = document.getElementById('send-button');
+const checkboxes = document.querySelectorAll('input[name="system"]');
+
+function addMessage(message, isUser = false) {
+  const messageElement = document.createElement('div');
+  messageElement.textContent = message;
+  messageElement.className = isUser ? 'user-message' : 'bot-message';
+  chatMessages.appendChild(messageElement);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+function addImage(imageUrl) {
+  const imageContainer = document.createElement('div');
+  imageContainer.className = 'image-container';
+  
+  const imageElement = document.createElement('img');
+  imageElement.src = imageUrl;
+  imageElement.className = 'chat-image';
+  
+  imageContainer.appendChild(imageElement);
+  chatMessages.appendChild(imageContainer);
+  chatMessages.scrollTop = chatMessages.scrollHeight;
+}
+
+async function handleUserInput() {
+  const message = userInput.value.trim();
+  if (message) {
+    const selectedSystems = Array.from(checkboxes)
+      .filter(checkbox => checkbox.checked)
+      .map(checkbox => checkbox.value)
+      .join('^');
+
+    const fullMessage = selectedSystems ? `${selectedSystems}%${message}` : message;
+    addMessage(fullMessage, true);
+
+    try {
+      const response = await fetch('/generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ input: fullMessage }),
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const blob = await response.blob();
+      const imageUrl = URL.createObjectURL(blob);
+      addImage(imageUrl);
+    } catch (error) {
+      console.error('Error:', error);
+      addMessage(`오류 발생: ${error.message}`, false);
     }
-    // 응답으로 받은 이미지 Blob 처리
-    const blob = await response.blob();
-    const imageUrl = URL.createObjectURL(blob);
-    imageOutput.innerHTML = `<img src="${imageUrl}" alt="Generated Diagram">`;
-  } catch (error) {
-    alert("오류: " + error.message);
-  } finally {
-    generateButton.disabled = false;
-    generateButton.textContent = "이미지 생성";
+
+    userInput.value = '';
+  }
+}
+
+sendButton.addEventListener('click', handleUserInput);
+userInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') {
+    handleUserInput();
   }
 });
+

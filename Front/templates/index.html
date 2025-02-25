@@ -1,43 +1,47 @@
 <!DOCTYPE html>
+<!--
 <html lang="ko">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>보안 요구사항 템플릿</title>
-  <link rel="stylesheet" href="../static/styles.css">
-</head>
-<body>
-  <div class="container">
-    <h1>보안 요구사항 템플릿</h1>
-
-    <!-- 요구사항 1 -->
-    <div class="section">
-      <h2>요구사항 1</h2>
-      <div class="input-group">
-        <select id="dropdown" class="dropdown">
-          <option value="default">드롭박스</option>
-          <option value="custom">직접 입력</option>
-        </select>
-        <input type="text" id="customInput" class="text-input" placeholder="직접 입력" disabled>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간단한 챗봇</title>
+    <link rel="stylesheet" href="../static/styles.css">
+  </head>
+  <body>
+    <div class="chat-container">
+      <div id="chat-messages" class="chat-messages"></div>
+      <div class="input-area">
+        <input type="text" id="user-input" placeholder="질문을 입력하세요...">
+        <button id="send-button">전송</button>
       </div>
     </div>
+    <script src="../static/script.js"></script>
+  </body>
+</html>
+-->
 
-    <!-- 기타 요구사항 -->
-    <div class="section">
-      <h2>기타 요구사항</h2>
-      <textarea id="additionalInput" class="textarea" placeholder="여기에 내용을 입력하세요"></textarea>
-      <button id="generateButton" class="button">이미지 생성</button>
-    </div>
-
-    <!-- 생성 다이어그램 -->
-    <div class="section">
-      <h2>생성 다이어그램</h2>
-      <div id="imageOutput" class="image-output">
-        생성된 이미지 출력
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>간단한 챗봇</title>
+    <link rel="stylesheet" href="../static/styles.css">
+  </head>
+  <body>
+    <div class="chat-container">
+      <div class="checkbox-container">
+        <label><input type="checkbox" name="system" value="VPN"> VPN 유무</label>
+        <label><input type="checkbox" name="system" value="방화벽"> 방화벽 유무</label>
+        <label><input type="checkbox" name="system" value="DB"> DB 유무</label>
+        <label><input type="checkbox" name="system" value="클라우드"> 클라우드 유무</label>
+        <label><input type="checkbox" name="system" value="백업서버"> 백업서버 유무</label>
+      </div>
+      <div id="chat-messages" class="chat-messages"></div>
+      <div class="input-area">
+        <input type="text" id="user-input" placeholder="질문을 입력하세요...">
+        <button id="send-button">전송</button>
       </div>
     </div>
-  </div>
-
-  <script src="../static/script.js"></script>
-</body>
+    <script src="../static/script.js"></script>
+  </body>
 </html>
