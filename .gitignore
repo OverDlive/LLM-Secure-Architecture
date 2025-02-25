@@ -172,3 +172,6 @@ cython_debug/
 
 # symbolic
 LLM-Web
+
+# plant
+.puml

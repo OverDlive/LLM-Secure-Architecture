@@ -1,4 +1,5 @@
 import os
+import logging
 from flask import Flask, render_template, request, send_file, jsonify
 from dotenv import load_dotenv
 from gemini import call_gemini_api
@@ -15,6 +16,9 @@ app = Flask(__name__, static_folder=static_folder, template_folder=template_fold
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 app.config['TEMPLATES_AUTO_RELOAD'] = True
 
+# 로깅 설정
+logging.basicConfig(level=logging.INFO)
+
 @app.route('/')
 def home():
     return render_template('index.html')
@@ -27,20 +31,25 @@ def generate_diagram():
     """
     data = request.get_json()
     if not data or "input" not in data:
+        logging.error("입력 데이터가 올바르지 않습니다: %s", data)
         return jsonify({"error": "입력 데이터가 올바르지 않습니다."}), 400
 
     user_input = data["input"]
+    logging.info("Received prompt: %s", user_input)
+    
     try:
         # 1. Gemini API 호출하여 PlantUML 코드 생성
         plantuml_code = call_gemini_api(user_input)
-        print("Generated PlantUML Code:\n", plantuml_code)
+        logging.info("Generated PlantUML Code:\n%s", plantuml_code)
 
         # 2. PlantUML 코드를 이미지로 변환
         image_path = generate_plantuml_image(plantuml_code)
+        logging.info("Generated image at path: %s", image_path)
         
         # 3. 생성된 이미지 파일을 클라이언트에 반환
         return send_file(image_path, mimetype="image/png")
     except Exception as e:
+        logging.exception("Error generating diagram")
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
