@@ -1,0 +1,85 @@
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+  }
+  
+  .container {
+    max-width: 80%;
+    margin: auto;
+    padding: 20px;
+    background-color: #d5f5e3;
+    border: 2px solid #ffffff; 
+    border-radius: 8px;
+  }
+  .dropdown-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2열로 배치 */
+    gap: 10px; /* 드롭다운 목록 사이 간격 추가 */
+}
+
+.dropdown-container .input-group {
+    width: auto; /* 너비 자동 조절 */
+    margin: 0; /* 불필요한 여백 제거 */
+}
+  .dropdown-container .input-group label {
+      display: block; /* 라벨을 블록 요소로 변경 */
+      margin-bottom: 5px;
+  }
+  .dropdown-container .input-group select,
+  .dropdown-container .input-group input {
+      width: 80%;
+  }
+  
+  /* 제목 스타일 */
+  h1 {
+    text-align: center;
+    color: #333333;
+  }
+  
+  .section {
+    margin-bottom: 20px;
+  }
+  
+  /* 섹션 제목 */
+  h2 {
+    font-size: 18px;
+    color: #555555;
+  }
+  
+  /* 입력 그룹 스타일 */
+  .input-group {
+    display: flex;
+    gap: 10px;
+  }
+  
+  .dropdown {
+    padding: 6px;
+  }
+  
+  .text-input {
+    padding: 4px;
+  }
+  
+  .text-input[disabled] {
+    background-color: #f0f0f0; /* 비활성화 시 연한 회색 */
+  }
+  
+  /* 기타 요구사항 텍스트 영역 */
+  .textarea {
+    width: calc(100% - 20px);
+    height: 80px;
+    padding: 10px;
+  }
+  
+  /* 버튼 스타일 */
+  .button {
+    margin-top: 10px;
+    padding: 10px;
+    background-color: #fdff98;
+    color: rgb(255, 72, 0);
+    font-weight: bold;
+  }
+  
