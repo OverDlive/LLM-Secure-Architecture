@@ -7,14 +7,41 @@
 
 ## 프로젝트 구조
 ```
-├── app.py               # Flask 메인 엔트리 포인트
-├── requirements.txt     # 의존성 라이브러리 목록
-├── templates            # HTML 템플릿 폴더
-│   └── index.html
-├── static               # 정적 파일(CSS, JS 등)
-├── docs                # 문서 및 UML 설계 관련 자료 폴더
-├── README.md            # 프로젝트 소개 및 설명
-└── ...
+|-- Dockerfile
+|-- Front
+|   |-- __pycache__
+|   |   `-- app.cpython-312.pyc
+|   |-- static
+|   |   |-- script.js
+|   |   `-- styles.css
+|   `-- templates
+|       `-- index.html
+|-- LICENSE
+|-- README.md
+|-- __pycache__
+|   |-- app.cpython-312.pyc
+|   |-- gemini.cpython-312.pyc
+|   |-- plantuml_generator.cpython-312.pyc
+|   `-- uml_include_replacer.cpython-312.pyc
+|-- app.py
+|-- data
+|   `-- temp.puml
+|-- gemini.py
+|-- image
+|   |-- temp.png
+|   `-- temp.puml
+|-- plantuml_generator.py
+|-- plantuml_libs
+|   |-- C4.puml
+|   |-- C4_Component.puml
+|   |-- C4_Container.puml
+|   |-- C4_Context.puml
+|   |-- C4_Deployment.puml
+|   `-- C4_Dynamic.puml
+|-- requirements.txt
+`-- uml_include_replacer.py
+
+8 directories, 25 files
 ```
 ---
 
