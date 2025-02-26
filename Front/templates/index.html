@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-
 <html lang="ko">
   <head>
     <meta charset="UTF-8">
@@ -10,12 +9,92 @@
   <body>
     <div class="chat-container">
       <div class="checkbox-container">
-        <label><input type="checkbox" name="system" value="VPN"> VPN 유무</label>
-        <label><input type="checkbox" name="system" value="방화벽"> 방화벽 유무</label>
-        <label><input type="checkbox" name="system" value="DB"> DB 유무</label>
-        <label><input type="checkbox" name="system" value="클라우드"> 클라우드 유무</label>
-        <label><input type="checkbox" name="system" value="백업서버"> 백업서버 유무</label>
+        <!-- 시스템 체크박스 -->
+        <label>
+          <input type="checkbox" class="toggle" data-target="client-options"> 클라이언트
+        </label>
+        <div class="toggle-options" id="client-options" style="display: none;">
+          <label class="switch">
+            <input type="checkbox" class="toggle-item">
+            <span class="slider"></span> 프린터
+          </label>
+          <label class="switch">
+            <input type="checkbox" class="toggle-item">
+            <span class="slider"></span> 사용자 PC
+          </label>
+          <label class="switch">
+            <input type="checkbox" class="toggle-item">
+            <span class="slider"></span> 개인정보 취급자
+          </label>
+          <!-- 더 많은 항목들 추가 가능 -->
+        </div>
+
+        <label>
+          <input type="checkbox" class="toggle" data-target="network-options"> 네트워크
+        </label>
+        <div class="toggle-options" id="network-options" style="display: none;">
+          <label class="switch">
+            <input type="checkbox" class="toggle-item">
+            <span class="slider"></span> 네트워크 장비
+          </label>
+          <label class="switch">
+            <input type="checkbox" class="toggle-item">
+            <span class="slider"></span> 방화벽
+          </label>
+          <label class="switch">
+            <input type="checkbox" class="toggle-item">
+            <span class="slider"></span> 망분리
+          </label>
+        </div>
+
+        <label>
+          <input type="checkbox" class="toggle" data-target="server-options"> 서버
+        </label>
+        <div class="toggle-options" id="server-options" style="display: none;">
+          <label class="switch">
+            <input type="checkbox" class="toggle-item">
+            <span class="slider"></span> 서버시스템
+          </label>
+          <label class="switch">
+            <input type="checkbox" class="toggle-item">
+            <span class="slider"></span> 개발시스템
+          </label>
+          <!-- 더 많은 항목들 추가 가능 -->
+        </div>
+
+        <label>
+          <input type="checkbox" class="toggle" data-target="application-options"> 애플리케이션
+        </label>
+        <div class="toggle-options" id="application-options" style="display: none;">
+          <label class="switch">
+            <input type="checkbox" class="toggle-item">
+            <span class="slider"></span> 개발 애플리케이션
+          </label>
+          <label class="switch">
+            <input type="checkbox" class="toggle-item">
+            <span class="slider"></span> 애플리케이션
+          </label>
+        </div>
+
+        <label>
+          <input type="checkbox" class="toggle" data-target="db-options"> DB
+        </label>
+        <div class="toggle-options" id="db-options" style="display: none;">
+          <label class="switch">
+            <input type="checkbox" class="toggle-item">
+            <span class="slider"></span> DB 서버
+          </label>
+          <label class="switch">
+            <input type="checkbox" class="toggle-item">
+            <span class="slider"></span> 개인정보 DB
+          </label>
+          <label class="switch">
+            <input type="checkbox" class="toggle-item">
+            <span class="slider"></span> 업무 DB
+          </label>
+        </div>
       </div>
+
       <div id="chat-messages" class="chat-messages"></div>
       <div class="input-area">
         <input type="text" id="user-input" placeholder="질문을 입력하세요...">
