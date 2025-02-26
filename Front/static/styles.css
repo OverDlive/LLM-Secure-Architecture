@@ -10,17 +10,28 @@ body {
   padding: 10px;
 }
 
-/* 반응형 채팅 컨테이너 */
+/* 채팅 박스 비율 유지용 래퍼 */
+/* 화면 전체에서 너무 길어지지 않도록 너비는 90vw와 calc(90vh * 16/9) 중 작은 값을 사용 */
 .chat-container {
-  width: 90vw;
-  max-width: 800px;
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
+  width: min(90vw, calc(90vh * 16 / 9));
+  aspect-ratio: 16/9;
+  margin: auto;
+  position: relative;
   border: 1px solid #ccc;
   border-radius: 5px;
-  overflow: hidden;
   background-color: white;
+}
+
+/* 실제 채팅 콘텐츠 (비율 유지용 래퍼 내부에 절대 위치로 채움) */
+.chat-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
 }
 
 /* 체크박스 영역 */
@@ -43,27 +54,34 @@ body {
   display: flex;
   flex-direction: column;
   overflow-y: auto;
+  overflow-x: visible; /* 좌우 아이콘이 보이도록 */
 }
 
-/* 입력 영역 */
+/* 입력 영역 - 고정 높이로 설정하여 크기가 변하지 않음 */
 .input-area {
   display: flex;
   border-top: 1px solid #ccc;
+  height: 50px;  /* 고정 높이 */
+  flex-shrink: 0;
 }
 
+/* input box는 고정된 폰트 사이즈 및 패딩 사용 */
 #user-input {
   flex-grow: 1;
   border: none;
   padding: 10px;
-  font-size: 1em;
+  font-size: 16px; /* 고정 폰트 사이즈 */
+  box-sizing: border-box;
 }
 
+/* 전송 버튼도 고정 크기 */
 #send-button {
   border: none;
   background-color: #4CAF50;
   color: white;
   padding: 10px;
   cursor: pointer;
+  font-size: 16px;
 }
 
 /* 스위치 스타일 */
@@ -76,7 +94,7 @@ body {
 
 .switch span {
   font-size: 14px;
-  margin-right: 35px; /* 텍스트와 스위치 사이에 여백을 두기 */
+  margin-right: 35px; /* 텍스트와 스위치 사이에 여백 */
 }
 
 .switch input {
@@ -145,24 +163,48 @@ body {
   background-color: #bbb;
 }
 
-/* 채팅창 메시지 스타일 */
+/* 메시지 아이콘 스타일 */
+.message-icon {
+  width: 24px;
+  height: 24px;
+  object-fit: cover;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* 채팅 메시지 스타일 (아이콘은 박스 바깥에 배치) */
 .user-message,
 .bot-message {
+  position: relative;
   margin: 5px 0;
-  padding: 8px;
   border-radius: 5px;
   max-width: 80%;
   word-wrap: break-word;
 }
 
+/* 사용자 메시지: 오른쪽 정렬, 오른쪽에 아이콘 공간 확보 */
 .user-message {
   background-color: #d1e7dd;
   align-self: flex-end;
+  padding: 8px 40px 8px 8px;
 }
 
+/* 봇 메시지: 왼쪽 정렬, 왼쪽에 아이콘 공간 확보 */
 .bot-message {
   background-color: #f8d7da;
   align-self: flex-start;
+  padding: 8px 8px 8px 40px;
+}
+
+/* 사용자 아이콘: 메시지 박스 오른쪽 바깥 */
+.user-message .message-icon {
+  right: -40px;
+}
+
+/* 봇 아이콘: 메시지 박스 왼쪽 바깥 */
+.bot-message .message-icon {
+  left: -40px;
 }
 
 /* 이미지 컨테이너 및 채팅 이미지 */
