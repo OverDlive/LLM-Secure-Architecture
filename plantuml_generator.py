@@ -48,12 +48,16 @@ def generate_plantuml_image(plantuml_code: str, output_file="diagram.png") -> st
     except subprocess.CalledProcessError as e:
         raise Exception(f"PlantUML 이미지 생성 실패: {e.stderr.strip()}") from e
     
-    # 생성된 이미지 파일 (image/temp.png) 확인 및 리네임
+    # Docker 컨테이너가 생성한 이미지 파일 경로 (image/temp.png)
     generated_image = os.path.join(image_dir, "temp.png")
     if os.path.exists(generated_image):
         final_image_path = os.path.join(image_dir, output_file)
+        # 대상 파일이 존재하면 삭제
+        if os.path.exists(final_image_path):
+            os.remove(final_image_path)
         os.rename(generated_image, final_image_path)
         os.remove(temp_puml_file)
         return final_image_path
     else:
         raise Exception("PlantUML 이미지 파일이 생성되지 않았습니다.")
+
