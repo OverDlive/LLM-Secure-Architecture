@@ -178,3 +178,5 @@ temp.puml
 
 # plantUML image file
 *.png
+
+*.uuid
