@@ -47,7 +47,9 @@ def generate_diagram():
         logging.info("Generated image at path: %s", image_path)
         
         # 3. 생성된 이미지 파일을 클라이언트에 반환
-        return send_file(image_path, mimetype="image/png")
+        abs_image_path = os.path.abspath(image_path)
+        return send_file(abs_image_path, mimetype="image/png")
+
     except Exception as e:
         logging.exception("Error generating diagram")
         return jsonify({"error": str(e)}), 500

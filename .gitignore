@@ -175,3 +175,6 @@ LLM-Web
 
 # plant
 temp.puml
+
+# plantUML image file
+*.png
