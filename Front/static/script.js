@@ -30,10 +30,13 @@ async function handleUserInput() {
     const message = userInput.value.trim();
     
     if (message) {
+        // 입력값을 바로 초기화하여 텍스트가 사라지도록 함
+        userInput.value = '';
+
         // 체크된 하위 옵션(toggle-item)만 선택
         const selectedOptions = Array.from(document.querySelectorAll('.toggle-item:checked'))
             .map(item => item.parentElement.textContent.trim())
-            .filter(option => option); // 필터링을 통해 선택된 항목만 반환
+            .filter(option => option);
 
         // 선택된 하위 옵션들을 결합
         const selectedMessage = selectedOptions.join('^');
@@ -41,7 +44,7 @@ async function handleUserInput() {
         // 메시지와 선택된 하위 옵션을 결합
         const fullMessage = selectedMessage ? `${selectedMessage}%${message}` : message;
         
-        // 사용자 메시지 화면에 추가
+        // 사용자 메시지 화면에 추가 (오른쪽 정렬)
         addMessage(fullMessage, true);
 
         try {
@@ -54,22 +57,18 @@ async function handleUserInput() {
                 body: JSON.stringify({ input: fullMessage }),
             });
 
-            // 서버 응답 확인
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
 
-            // 서버로부터 받은 응답 처리
+            // 서버 응답 확인 (이미지 blob을 받아와 화면에 표시)
             const blob = await response.blob();
             const imageUrl = URL.createObjectURL(blob);
-            addImage(imageUrl); // 응답으로 받은 이미지를 화면에 표시
+            addImage(imageUrl);
         } catch (error) {
             console.error('Error:', error);
-            addMessage(`오류 발생: ${error.message}`, false); // 오류 메시지 표시
+            addMessage(`오류 발생: ${error.message}`, false);
         }
-
-        // 입력창 초기화
-        userInput.value = ''; 
     }
 }
 
@@ -98,9 +97,16 @@ document.querySelectorAll('.toggle').forEach(checkbox => {
 // 전송 버튼 클릭 시 사용자 입력 처리
 sendButton.addEventListener('click', handleUserInput);
 
-// 엔터 키 입력 시 사용자 입력 처리
-userInput.addEventListener('keypress', (e) => {
+// 엔터 키 입력 시 사용자 입력 처리 및 입력창 텍스트 초기화
+userInput.addEventListener('keydown', (e) => {
     if (e.key === 'Enter') {
+        e.preventDefault();
         handleUserInput();
     }
+});
+
+// 브라우저 창 크기 변화에 따라 UI 크기 업데이트 (예: 입력창 폰트 크기 동적 조절)
+window.addEventListener('resize', () => {
+  const newFontSize = Math.max(14, window.innerWidth / 50);
+  userInput.style.fontSize = `${newFontSize}px`;
 });

@@ -1,21 +1,29 @@
 /* 기본 스타일 */
 body {
   font-family: Arial, sans-serif;
+  margin: 0;
+  background-color: #f0f0f0;
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
-  margin: 0;
-  background-color: #f0f0f0;
+  padding: 10px;
 }
 
+/* 반응형 채팅 컨테이너 */
 .chat-container {
-  width: 800px;
+  width: 90vw;
+  max-width: 800px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
   border: 1px solid #ccc;
   border-radius: 5px;
   overflow: hidden;
+  background-color: white;
 }
 
+/* 체크박스 영역 */
 .checkbox-container {
   padding: 10px;
   background-color: #e9e9e9;
@@ -27,15 +35,17 @@ body {
   cursor: pointer;
 }
 
+/* 채팅 메시지 영역 - flex로 영역을 채움 */
 .chat-messages {
-  height: 300px;
-  overflow-y: auto;
+  flex: 1;
   padding: 10px;
   background-color: white;
   display: flex;
   flex-direction: column;
+  overflow-y: auto;
 }
 
+/* 입력 영역 */
 .input-area {
   display: flex;
   border-top: 1px solid #ccc;
@@ -45,6 +55,7 @@ body {
   flex-grow: 1;
   border: none;
   padding: 10px;
+  font-size: 1em;
 }
 
 #send-button {
@@ -134,10 +145,33 @@ body {
   background-color: #bbb;
 }
 
-/* 채팅창 높이 맞추기 */
-.chat-messages {
-  max-height: 500px;
-  overflow-y: auto;
-  padding: 10px;
-  background-color: white;
+/* 채팅창 메시지 스타일 */
+.user-message,
+.bot-message {
+  margin: 5px 0;
+  padding: 8px;
+  border-radius: 5px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.user-message {
+  background-color: #d1e7dd;
+  align-self: flex-end;
+}
+
+.bot-message {
+  background-color: #f8d7da;
+  align-self: flex-start;
+}
+
+/* 이미지 컨테이너 및 채팅 이미지 */
+.image-container {
+  margin: 5px 0;
+  text-align: center;
+}
+
+.chat-image {
+  max-width: 100%;
+  height: auto;
 }
