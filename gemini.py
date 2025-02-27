@@ -73,10 +73,15 @@ def parse_user_input(user_input: str) -> tuple:
 
 def create_prompt(components: list, query: str) -> str:
     """Gemini API에 전송할 프롬프트 생성"""
-    prompt = "시스템 구성 요소\n"
+    prompt = "너는 정보보안 전문가야. 정보보호 구성도를 위한 PlantUML 코드를 생성해줘\n"
+    prompt += "uml 이미지를 생성하기 위함이야. 이미지 생성이 되도록을 고려하여 코드를 생성해.\n"
+    prompt += "필수요소는 다음과 같아.\n"
+    prompt += "1.@startuml과 @enduml 사이에 코드를 작성해줘\n"
+    prompt += "2.코드 첫 줄에 !include <C4/C4_Container> 추가해줘\n"
+    prompt += "구성요소는 다음과 같아"
     prompt += "\n".join(components) + "\n"
-    prompt += f"가 있음\n{query}\n"
-    prompt += "위 요구사항을 만족하는 보안 구성도를 위한 PlantUML을 작성해줘"
+    prompt += f"연결 관계와 구조는 다음과 같아.\n{query}\n"  
+    prompt += "코드를 생성한 후 유효성을 검증해줘."
     return prompt
 
 def extract_plantuml_code(data: dict) -> str:
