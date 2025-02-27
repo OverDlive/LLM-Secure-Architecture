@@ -12,101 +12,109 @@
       <!-- 실제 채팅 콘텐츠 (비율 유지) -->
       <div class="chat-content">
         <!-- 체크박스 영역 -->
-        <div class="checkbox-container">
-          <!-- 클라이언트 영역 -->
-          <label>
-            <input type="checkbox" class="toggle" data-target="client-options" />
-            클라이언트
-          </label>
-          <div class="toggle-options" id="client-options">
-            <label class="switch">
-              <input type="checkbox" class="toggle-item" />
-              <span class="slider"></span> 프린터
-            </label>
-            <label class="switch">
-              <input type="checkbox" class="toggle-item" />
-              <span class="slider"></span> 사용자 PC
-            </label>
-            <label class="switch">
-              <input type="checkbox" class="toggle-item" />
-              <span class="slider"></span> 운영자 PC
-            </label>
-            <label class="switch">
-              <input type="checkbox" class="toggle-item" />
-              <span class="slider"></span> 외부 사용자 PC
-            </label>
-          </div>
-
-          <!-- 네트워크 영역 -->
-          <label>
-            <input type="checkbox" class="toggle" data-target="network-options" />
-            네트워크
-          </label>
-          <div class="toggle-options" id="network-options">
-            <label class="switch">
-              <input type="checkbox" class="toggle-item" />
-              <span class="slider"></span> 네트워크 장비
-            </label>
-            <label class="switch">
-              <input type="checkbox" class="toggle-item" />
-              <span class="slider"></span> 방화벽
-            </label>
-            <label class="switch">
-              <input type="checkbox" class="toggle-item" />
-              <span class="slider"></span> 망분리
-            </label>
-          </div>
-
-          <!-- 서버 영역 -->
-          <label>
-            <input type="checkbox" class="toggle" data-target="server-options" />
-            서버
-          </label>
-          <div class="toggle-options" id="server-options">
-            <label class="switch">
-              <input type="checkbox" class="toggle-item" />
-              <span class="slider"></span> 서버시스템
-            </label>
-            <label class="switch">
-              <input type="checkbox" class="toggle-item" />
-              <span class="slider"></span> 개발시스템
-            </label>
-          </div>
-
-          <!-- 애플리케이션 영역 -->
-          <label>
-            <input type="checkbox" class="toggle" data-target="application-options" />
-            애플리케이션
-          </label>
-          <div class="toggle-options" id="application-options">
-            <label class="switch">
-              <input type="checkbox" class="toggle-item" />
-              <span class="slider"></span> 개발 애플리케이션
-            </label>
-            <label class="switch">
-              <input type="checkbox" class="toggle-item" />
-              <span class="slider"></span> 애플리케이션
-            </label>
-          </div>
-
-          <!-- DB 영역 -->
-          <label>
-            <input type="checkbox" class="toggle" data-target="db-options" />
-            DB
-          </label>
-          <div class="toggle-options" id="db-options">
-            <label class="switch">
-              <input type="checkbox" class="toggle-item" />
-              <span class="slider"></span> DB 서버
-            </label>
-            <label class="switch">
-              <input type="checkbox" class="toggle-item" />
-              <span class="slider"></span> 개인정보 DB
-            </label>
-            <label class="switch">
-              <input type="checkbox" class="toggle-item" />
-              <span class="slider"></span> 업무 DB
-            </label>
+        <div class="checkbox-scroll-container">
+          <div class="checkbox-container">
+            <div class="checkbox-category">
+              <!-- 클라이언트 영역 -->
+              <label>
+                <input type="checkbox" class="toggle" data-target="client-options" />
+                클라이언트
+              </label>
+              <div class="toggle-options" id="client-options">
+                <label class="switch">
+                  <input type="checkbox" class="toggle-item" />
+                  <span class="slider"></span> 프린터
+                </label>
+                <label class="switch">
+                  <input type="checkbox" class="toggle-item" />
+                  <span class="slider"></span> 사용자 PC
+                </label>
+                <label class="switch">
+                  <input type="checkbox" class="toggle-item" />
+                  <span class="slider"></span> 운영자 PC
+                </label>
+                <label class="switch">
+                  <input type="checkbox" class="toggle-item" />
+                  <span class="slider"></span> 외부 사용자 PC
+                </label>
+              </div>
+            </div>
+            <div class="checkbox-category">
+              <!-- 네트워크 영역 -->
+              <label>
+                <input type="checkbox" class="toggle" data-target="network-options" />
+                네트워크
+              </label>
+              <div class="toggle-options" id="network-options">
+                <label class="switch">
+                  <input type="checkbox" class="toggle-item" />
+                  <span class="slider"></span> 네트워크 장비
+                </label>
+                <label class="switch">
+                  <input type="checkbox" class="toggle-item" />
+                  <span class="slider"></span> 방화벽
+                </label>
+                <label class="switch">
+                  <input type="checkbox" class="toggle-item" />
+                  <span class="slider"></span> 망분리
+                </label>
+              </div>
+            </div>
+            <div class="checkbox-category">
+              <!-- 서버 영역 -->
+              <label>
+                <input type="checkbox" class="toggle" data-target="server-options" />
+                서버
+              </label>
+              <div class="toggle-options" id="server-options">
+                <label class="switch">
+                  <input type="checkbox" class="toggle-item" />
+                  <span class="slider"></span> 서버시스템
+                </label>
+                <label class="switch">
+                  <input type="checkbox" class="toggle-item" />
+                  <span class="slider"></span> 개발시스템
+                </label>
+              </div>
+            </div>
+            <div class="checkbox-category">
+              <!-- 애플리케이션 영역 -->
+              <label>
+                <input type="checkbox" class="toggle" data-target="application-options" />
+                애플리케이션
+              </label>
+              <div class="toggle-options" id="application-options">
+                <label class="switch">
+                  <input type="checkbox" class="toggle-item" />
+                  <span class="slider"></span> 개발 애플리케이션
+                </label>
+                <label class="switch">
+                  <input type="checkbox" class="toggle-item" />
+                  <span class="slider"></span> 애플리케이션
+                </label>
+              </div>
+            </div>
+            <div class="checkbox-category">
+              <!-- DB 영역 -->
+              <label>
+                <input type="checkbox" class="toggle" data-target="db-options" />
+                DB
+              </label>
+              <div class="toggle-options" id="db-options">
+                <label class="switch">
+                  <input type="checkbox" class="toggle-item" />
+                  <span class="slider"></span> DB 서버
+                </label>
+                <label class="switch">
+                  <input type="checkbox" class="toggle-item" />
+                  <span class="slider"></span> 개인정보 DB
+                </label>
+                <label class="switch">
+                  <input type="checkbox" class="toggle-item" />
+                  <span class="slider"></span> 업무 DB
+                </label>
+              </div>
+            </div>
           </div>
         </div>
 

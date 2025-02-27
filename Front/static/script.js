@@ -2,6 +2,8 @@ const chatMessages = document.getElementById('chat-messages');
 const userInput = document.getElementById('user-input');
 const sendButton = document.getElementById('send-button');
 
+
+
 // 메시지를 채팅창에 추가하는 함수 (아이콘 포함)
 function addMessage(message, isUser = false) {
     const messageElement = document.createElement('div');
@@ -11,10 +13,10 @@ function addMessage(message, isUser = false) {
     const iconElement = document.createElement('img');
     iconElement.className = 'message-icon';
     if (isUser) {
-        iconElement.src = '/static/images/person.png';
+        iconElement.src = '../static/images/person.jpg';
         iconElement.alt = 'Person Icon';
     } else {
-        iconElement.src = '/static/images/robot.png';
+        iconElement.src = '../static/images/robot.jpg';
         iconElement.alt = 'Robot Icon';
     }
     
@@ -29,7 +31,7 @@ function addMessage(message, isUser = false) {
         messageElement.appendChild(textElement);
         messageElement.appendChild(iconElement);
     } else {
-        // 봇 메시지: 아이콘 후에 텍스트 (왼쪽 아이콘)
+    // 봇 메시지: 아이콘 후에 텍스트 (왼쪽 아이콘)
         messageElement.appendChild(iconElement);
         messageElement.appendChild(textElement);
     }
@@ -60,8 +62,14 @@ async function handleUserInput() {
         // 입력값을 바로 초기화하여 텍스트가 사라지도록 함
         userInput.value = '';
         
-        // 체크된 하위 옵션(toggle-item)만 선택
+        // 체크된 하위 옵션(toggle-item)만 선택, 상위 체크박스가 선택되지 않으면 들어가지 않음
         const selectedOptions = Array.from(document.querySelectorAll('.toggle-item:checked'))
+            .filter(item => {
+                // 상위 toggle 체크박스 찾기
+                const parentToggle = item.closest('.toggle-options').previousElementSibling.querySelector('.toggle');
+                // 상위 toggle이 체크된 경우에만 true 반환
+                return parentToggle && parentToggle.checked;
+            })
             .map(item => item.parentElement.textContent.trim())
             .filter(option => option);
         
@@ -72,7 +80,7 @@ async function handleUserInput() {
         const fullMessage = selectedMessage ? `${selectedMessage}%${message}` : message;
         
         // 사용자 메시지 화면에 추가 (오른쪽 정렬 + 사람 아이콘)
-        addMessage(fullMessage, true);
+        addMessage(message, true);
         
         try {
             // 서버로 요청 전송
@@ -113,6 +121,13 @@ function toggleOptionsDisplay(checkbox) {
 document.querySelectorAll('.toggle').forEach(checkbox => {
     checkbox.addEventListener('change', function() {
         toggleOptionsDisplay(this);
+    });
+});
+
+// 페이지 로드 시 기본 체크박스 상태 반영
+document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('.toggle').forEach(checkbox => {
+        toggleOptionsDisplay(checkbox);
     });
 });
 
